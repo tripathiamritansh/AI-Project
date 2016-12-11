@@ -1,0 +1,3 @@
+- graphs are showing a general trend
+- the accuracies are increasing quadratically but the difference is less in the later increases
+- ratio of 0.8 (i.e. 80:20) is looking like the optimal ratio.
