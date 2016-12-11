@@ -15,8 +15,17 @@ X = train[features]
 y = train['label']
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X/255.,y,test_size=0.1,random_state=0)
 
+'''
 clf_svm = LinearSVC()
 clf_svm.fit(X_train, y_train)
 y_pred_svm = clf_svm.predict(X_test)
 acc_svm = accuracy_score(y_test, y_pred_svm)
 print "Linear SVM accuracy: ",acc_svm
+'''
+
+clf_nn = DBN([X_train.shape[1], 300, 10],learn_rates=0.3,learn_rate_decays=0.9,epochs=15)
+print len(X_train)
+print len(y_train)
+clf_nn.fit(X_train, y_train)
+acc_nn = clf_nn.score(X_test,y_test)
+print "neural network accuracy: ",acc_nn
