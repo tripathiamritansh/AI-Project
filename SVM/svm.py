@@ -8,12 +8,14 @@ from sklearn.svm import LinearSVC
 
 #Fetching the datasets
 dataset = datasets.fetch_mldata("MNIST Original")
+
 #dataset = datasets.load_digits()
 
 for key, _ in dataset.iteritems():
 	print key
 
 training_data = dataset.data[:70000]
+print type(training_data)
 training_target = dataset.target[:70000]
 
 testing_data = dataset.data[-40000:]
@@ -34,15 +36,9 @@ for feature in featureSet:
 print len(hogFeatures)
 
 hog_features=np.array(hogFeatures, 'float64')
-f=np.column_stack((featureSet,hog_features))
+training_features=np.column_stack((featureSet,hog_features))
 
-#[featureSet[x].append(hogFeatures[x]) for x in range(featureSet)]
-print len(hog_features)
 
-print len(f)
-print len(f[0])
-'''
-hog_features = hog_features+featureSet
 #instantiating classifier
 linear_svm=LinearSVC()
 
@@ -52,18 +48,18 @@ linear_svm.fit(hog_features,labelSet)
 featureSet_testing=np.array(testing_data, 'int16')
 
 hogFeatures_testing = []
-for feature in featureSet_testing:s
+for feature in featureSet_testing:
 	f_testing = hog(feature.reshape((28, 28)), orientations=9, pixels_per_cell=(14, 14), cells_per_block=(1, 1), visualise=False)
 	hogFeatures_testing.append(f_testing)
 hog_features_testing=np.array(hogFeatures_testing, 'float64')
-hogFeatures_testing= hogFeatures_testing+featureSet_testing
+testing_features=np.column_stack((featureSet_testing,hog_features_testing))
+
 #Testing
 
 s = 0.0
 
-for i, _ in enumerate(testing_data):
-	if linear_svm.predict(testing_data[i])[0] == testing_target[i]:
+for i, _ in enumerate(hog_features_testing):
+	if linear_svm.predict(hog_features_testing[i]) == testing_target[i]:
 		s += 1
 
 print "accuracy = ", s/len(testing_data)
-'''
