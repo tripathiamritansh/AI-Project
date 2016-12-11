@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score
 from nolearn.dbn import DBN
 import timeit
 
-train = pd.read_csv("train.csv")
+train = pd.read_csv("../train.csv")
 features = train.columns[1:]
 X = train[features]
 y = train['label']
