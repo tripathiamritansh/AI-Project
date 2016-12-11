@@ -8,6 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn import datasets
 from sklearn import preprocessing
+from skimage.feature import hog
 from nolearn.dbn import DBN
 import timeit
 
@@ -24,6 +25,9 @@ y_pred_svm = clf_svm.predict(X_test)
 acc_svm = accuracy_score(y_test, y_pred_svm)
 print "Linear SVM accuracy: ",acc_svm
 '''
+
+
+#Below ANN
 
 '''
 clf_nn = DBN([X_train.shape[1], 300, 10],learn_rates=0.3,learn_rate_decays=0.9,epochs=15)
