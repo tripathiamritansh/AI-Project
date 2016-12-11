@@ -6,6 +6,7 @@ from sklearn.svm import LinearSVC
 from sklearn.linear_model import SGDClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
+from sklearn import datasets
 from nolearn.dbn import DBN
 import timeit
 
@@ -23,9 +24,29 @@ acc_svm = accuracy_score(y_test, y_pred_svm)
 print "Linear SVM accuracy: ",acc_svm
 '''
 
+'''
 clf_nn = DBN([X_train.shape[1], 300, 10],learn_rates=0.3,learn_rate_decays=0.9,epochs=15)
 print len(X_train)
 print len(y_train)
-clf_nn.fit(X_train, y_train)
-acc_nn = clf_nn.score(X_test,y_test)
+training_x = X_train.as_matrix()
+training_y = y_train.as_matrix()
+testing_x = X_test.as_matrix()
+testing_y = y_test.as_matrix()
+clf_nn.fit(training_x, training_y)
+acc_nn = clf_nn.score(testing_x,testing_y)
+print "neural network accuracy: ",acc_nn
+'''
+
+
+dataset = datasets.fetch_mldata("MNIST Original")
+
+train_x = dataset.data[:50000]
+train_y = dataset.target[:50000]
+
+test_x = dataset.data[-20000:]
+test_y = dataset.target[-20000:]
+
+clf_nn = DBN([len(train_x[0]), 300, 10],learn_rates=0.3,learn_rate_decays=0.9,epochs=15)
+clf_nn.fit(train_x, train_y)
+acc_nn = clf_nn.score(test_x,test_y)
 print "neural network accuracy: ",acc_nn
