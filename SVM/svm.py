@@ -30,8 +30,19 @@ hogFeatures = []
 for feature in featureSet:
 	f = hog(feature.reshape((28, 28)), orientations=9, pixels_per_cell=(14, 14), cells_per_block=(1, 1), visualise=False)
 	hogFeatures.append(f)
-hog_features=np.array(hogFeatures, 'float64')
 
+print len(hogFeatures)
+
+hog_features=np.array(hogFeatures, 'float64')
+f=np.column_stack((featureSet,hog_features))
+
+#[featureSet[x].append(hogFeatures[x]) for x in range(featureSet)]
+print len(hog_features)
+
+print len(f)
+print len(f[0])
+'''
+hog_features = hog_features+featureSet
 #instantiating classifier
 linear_svm=LinearSVC()
 
@@ -41,18 +52,18 @@ linear_svm.fit(hog_features,labelSet)
 featureSet_testing=np.array(testing_data, 'int16')
 
 hogFeatures_testing = []
-for feature in featureSet_testing:
+for feature in featureSet_testing:s
 	f_testing = hog(feature.reshape((28, 28)), orientations=9, pixels_per_cell=(14, 14), cells_per_block=(1, 1), visualise=False)
 	hogFeatures_testing.append(f_testing)
 hog_features_testing=np.array(hogFeatures_testing, 'float64')
+hogFeatures_testing= hogFeatures_testing+featureSet_testing
 #Testing
 
 s = 0.0
-print hogFeatures_testing
-"""
+
 for i, _ in enumerate(testing_data):
-	if linear_svm.predict(hog_features_testing)[0] == testing_target[i]:
+	if linear_svm.predict(testing_data[i])[0] == testing_target[i]:
 		s += 1
 
 print "accuracy = ", s/len(testing_data)
-"""
+'''
