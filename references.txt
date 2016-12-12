@@ -1,0 +1,11 @@
+References
+
+Random forest
+http://yann.lecun.com/exdb/publis/pdf/matan-92.pdf
+
+http://yann.lecun.com/exdb/publis/pdf/lecun-95b.pdf
+
+https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm
+
+Random forest Pseudocode:
+http://pages.cs.wisc.edu/~matthewb/pages/notes/pdf/ensembles/RandomForests.pdf
