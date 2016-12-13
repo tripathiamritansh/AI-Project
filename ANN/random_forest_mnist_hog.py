@@ -8,6 +8,7 @@ from sklearn import preprocessing
 from skimage.feature import hog
 from nolearn.dbn import DBN
 import timeit
+import time
 
 image_data = datasets.fetch_mldata('MNIST Original') # Get the MNIST dataset.
 
@@ -32,7 +33,10 @@ for feature in test_x:
 	hogFeatures_test.append(f)
 
 clf_rf = RandomForestClassifier()
+start = time.time()
 clf_rf.fit(hogFeatures_train, train_y)
+finish = time.time()
 y_pred_rf = clf_rf.predict(hogFeatures_test)
 acc_rf = accuracy_score(test_y, y_pred_rf)
 print "random forest accuracy: ",acc_rf
+print "time : ", finish - start

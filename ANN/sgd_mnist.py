@@ -11,6 +11,7 @@ from sklearn import preprocessing
 from skimage.feature import hog
 from nolearn.dbn import DBN
 import timeit
+import time
 
 image_data = datasets.fetch_mldata('MNIST Original') # Get the MNIST dataset.
 
@@ -23,7 +24,10 @@ basic_x = min_max_scaler.fit_transform(basic_x.astype(float)) # Scale pixel inte
 train_x, test_x, train_y, test_y = cross_validation.train_test_split(basic_x, basic_y, test_size = 0.1, random_state = 0) # Split training/test.
 
 clf_sgd = SGDClassifier()
+start = time.time()
 clf_sgd.fit(train_x, train_y)
+finish = time.time()
 y_pred_sgd = clf_sgd.predict(test_x)
 acc_sgd = accuracy_score(test_y, y_pred_sgd)
 print "stochastic gradient descent accuracy: ",acc_sgd
+print "time : ", finish - start

@@ -11,6 +11,7 @@ from sklearn import preprocessing
 from skimage.feature import hog
 from nolearn.dbn import DBN
 import timeit
+import time
 
 image_data = datasets.fetch_mldata('MNIST Original') # Get the MNIST dataset.
 
@@ -28,6 +29,9 @@ training_x = train_x#.as_matrix()
 training_y = train_y#.as_matrix()
 testing_x = test_x#.as_matrix()
 testing_y = test_y#.as_matrix()
+start = time.time()
 clf_nn.fit(training_x, training_y)
+finish = time.time()
 acc_nn = clf_nn.score(testing_x,testing_y)
 print "neural network accuracy: ",acc_nn
+print "time : ", finish - start

@@ -11,6 +11,7 @@ from sklearn import preprocessing
 from skimage.feature import hog
 from nolearn.dbn import DBN
 import timeit
+import time
 
 image_data = datasets.fetch_mldata('MNIST Original') # Get the MNIST dataset.
 
@@ -23,7 +24,10 @@ basic_x = min_max_scaler.fit_transform(basic_x.astype(float)) # Scale pixel inte
 train_x, test_x, train_y, test_y = cross_validation.train_test_split(basic_x, basic_y, test_size = 0.1, random_state = 0) # Split training/test.
 
 clf_knn = KNeighborsClassifier()
+start = time.time()
 clf_knn.fit(train_x, train_y)
+finish = time.time()
 y_pred_knn = clf_knn.predict(test_x)
 acc_knn = accuracy_score(test_y, y_pred_knn)
 print "nearest neighbors accuracy: ",acc_knn
+print "Time : ", finish - start

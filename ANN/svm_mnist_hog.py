@@ -11,6 +11,7 @@ from sklearn import preprocessing
 from skimage.feature import hog
 from nolearn.dbn import DBN
 import timeit
+import time
 
 image_data = datasets.fetch_mldata('MNIST Original') # Get the MNIST dataset.
 
@@ -36,7 +37,10 @@ for feature in test_x:
 
 
 clf_svm = LinearSVC()
+start = time.time()
 clf_svm.fit(hogFeatures_train, train_y)
+finish = time.time()
 y_pred_svm = clf_svm.predict(hogFeatures_test)
 acc_svm = accuracy_score(test_y, y_pred_svm)
 print "Linear SVM accuracy: ",acc_svm
+print "time : ", finish - start
