@@ -15,3 +15,4 @@ https://en.wikipedia.org/wiki/Support_vector_machine#frbanner3
 
 Dataset
 https://www.kaggle.com/c/digit-recognizer/data
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html
